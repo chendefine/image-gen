@@ -91,6 +91,7 @@ class ImageGenTest(unittest.TestCase):
         self.assertEqual(result["mode"], "generate")
         self.assertEqual(len(result["files"]), 1)
         self.assertEqual(Path(result["files"][0]).read_bytes(), PNG)
+        self.assertRegex(Path(result["files"][0]).name, r"^\d{8}-\d{6}\.png$")
 
     def test_generate_optional_fields_and_numbered_output(self):
         self.server.responses.append((200, b64_items(2)))

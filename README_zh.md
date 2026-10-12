@@ -145,7 +145,7 @@ python3 scripts/image_gen.py --prompt TEXT [options]
 | `--size WxH` | 输出尺寸, 宽高比 1:3 到 3:1 (如 `1536x1024`). 默认由模型决定. |
 | `--transparent` | 请求透明背景 (带 alpha 通道的 PNG). |
 | `--output PATH`, `-o` | 指定输出文件. 生成多张时依次为 `name-1.png`, `name-2.png` 等. |
-| `--output-dir DIR` | 输出目录, 默认 `./generated-images`, 文件名为 `<时间戳>-<提示词摘要>.<扩展名>`. 不能和 `--output` 同时使用. |
+| `--output-dir DIR` | 输出目录, 默认 `./generated-images`, 文件名为 `<时间戳>.<扩展名>` (如 `20261012-153000.png`). 不能和 `--output` 同时使用. |
 | `--model ID` | 本次调用覆盖 `IMAGE_GEN_MODEL`. |
 
 没有传的参数不会发给接口, 按服务端默认值处理. 尺寸较大时服务商可能会调整实际像素, 但宽高比不变.
@@ -159,7 +159,7 @@ python3 scripts/image_gen.py --prompt TEXT [options]
   "mode": "generate",
   "provider": "openai",
   "model": "gpt-image-2",
-  "files": ["/abs/path/generated-images/20261012-153000-an-orange-tabby-cat.png"]
+  "files": ["/abs/path/generated-images/20261012-153000.png"]
 }
 ```
 

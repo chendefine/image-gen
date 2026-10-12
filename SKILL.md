@@ -23,7 +23,7 @@ python3 <skill_dir>/scripts/image_gen.py --prompt "<clear description>" [options
 | `--size WxH` | no | Any `WIDTHxHEIGHT` whose aspect ratio is between 1:3 and 3:1, e.g. `1024x1024`, `1536x1024`, `1024x1536`. Omit to let the model choose. |
 | `--transparent` | no | Request a transparent background (PNG with alpha). For icons, logos, sprites, stickers. |
 | `--output PATH` | no | Exact output file. With several images it becomes `name-1.png`, `name-2.png`, … |
-| `--output-dir DIR` | no | Output directory (default `./generated-images`); files are named `<timestamp>-<prompt-slug>.<ext>`. |
+| `--output-dir DIR` | no | Output directory (default `./generated-images`); files are named `<timestamp>.<ext>`. |
 | `--model ID` | no | Do **not** pass this unless the user explicitly names a model; the configured default model is used otherwise. |
 
 Only pass optional flags the request actually needs; anything omitted is left to the server's defaults.

@@ -145,7 +145,7 @@ python3 scripts/image_gen.py --prompt TEXT [options]
 | `--size WxH` | Output size, aspect ratio between 1:3 and 3:1 (e.g. `1536x1024`). Default: chosen by the model. |
 | `--transparent` | Ask for a transparent background (PNG with alpha). |
 | `--output PATH`, `-o` | Exact output file. With several images: `name-1.png`, `name-2.png`, … |
-| `--output-dir DIR` | Output directory. Default: `./generated-images`, files named `<timestamp>-<prompt-slug>.<ext>`. Cannot be used with `--output`. |
+| `--output-dir DIR` | Output directory. Default: `./generated-images`, files named `<timestamp>.<ext>` (e.g. `20261012-153000.png`). Cannot be used with `--output`. |
 | `--model ID` | Overrides `IMAGE_GEN_MODEL` for this call. |
 
 Any option you leave out is not sent, so the server's default applies. The provider may change the pixel size of large requests but keeps the aspect ratio.
@@ -159,7 +159,7 @@ On success the script prints one JSON object to stdout:
   "mode": "generate",
   "provider": "openai",
   "model": "gpt-image-2",
-  "files": ["/abs/path/generated-images/20261012-153000-an-orange-tabby-cat.png"]
+  "files": ["/abs/path/generated-images/20261012-153000.png"]
 }
 ```
 

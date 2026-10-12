@@ -52,11 +52,6 @@ def parse_size(value: str) -> str:
     return f"{width}x{height}"
 
 
-def slugify(text: str, limit: int = 40) -> str:
-    slug = re.sub(r"[^\w]+", "-", text.lower(), flags=re.UNICODE).strip("-_")
-    return slug[:limit].rstrip("-_") or "image"
-
-
 def unique_path(path: Path) -> Path:
     if not path.exists():
         return path
@@ -67,14 +62,14 @@ def unique_path(path: Path) -> Path:
     raise UsageError(f"could not find a free filename near {path}")
 
 
-def plan_paths(count: int, extensions: list[str], prompt: str, output: str | None, output_dir: str | None) -> list[Path]:
+def plan_paths(count: int, extensions: list[str], output: str | None, output_dir: str | None) -> list[Path]:
     if output:
         target = Path(output).expanduser()
         stem, parent = target.stem, target.parent
         names = [stem] if count == 1 else [f"{stem}-{i}" for i in range(1, count + 1)]
     else:
         parent = Path(output_dir or DEFAULT_OUTPUT_DIR).expanduser()
-        base = f"{datetime.now():%Y%m%d-%H%M%S}-{slugify(prompt)}"
+        base = f"{datetime.now():%Y%m%d-%H%M%S}"
         names = [base] if count == 1 else [f"{base}-{i}" for i in range(1, count + 1)]
     return [parent / f"{name}.{ext}" for name, ext in zip(names, extensions)]
 
@@ -148,7 +143,7 @@ def main(argv: list[str] | None = None, environ: dict[str, str] | None = None) -
         )
         results = provider.run(request)
 
-        paths = plan_paths(len(results), [r.extension for r in results], prompt, args.output, args.output_dir)
+        paths = plan_paths(len(results), [r.extension for r in results], args.output, args.output_dir)
         saved = []
         for result, path in zip(results, paths):
             path.parent.mkdir(parents=True, exist_ok=True)
