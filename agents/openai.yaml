@@ -1,0 +1,4 @@
+interface:
+  display_name: "Image Gen"
+  short_description: "Generate or edit images, design mockups, and assets"
+  default_prompt: "Use $image-gen to generate or edit images, design mockups, or project image assets."
