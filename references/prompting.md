@@ -8,10 +8,23 @@ User: "画一只在窗台上晒太阳的橘猫"
 
 ```bash
 python3 <skill_dir>/scripts/image_gen.py \
-  --prompt "一只橘色虎斑猫坐在洒满午后阳光的窗台上, 眯着眼睛晒太阳, 温暖柔和的插画风格"
+  --prompt "画一只在窗台上晒太阳的橘猫"
 ```
 
-Keep the user's wording and intent; add only details that make the expectation explicit.
+The request is already specific, so pass it through as-is. Don't add a style, mood, or details the user didn't ask for.
+
+## Vague requests: ask first
+
+User: "帮我做个 logo"
+
+There is no product name, subject, or style, so any guess is likely wasted. Ask once, with options:
+
+> 这个 logo 是给什么产品/品牌用的, 需要包含名称文字吗? 风格可以选:
+> 1. 扁平几何图形 (推荐, 小尺寸下清晰)
+> 2. 手绘/插画感
+> 3. 纯文字标 (wordmark)
+
+Generate after the user answers. Don't ask about details you can settle yourself (exact size, file location).
 
 ## Editing
 
@@ -51,6 +64,8 @@ Tips:
 - After the user picks a direction, iterate with `--input-image` on that draft.
 
 ## Development assets
+
+Here the image is one step of a larger task, so don't stop to ask the user. Gather the context yourself and write a complete prompt.
 
 User: "空状态页需要一张插画"
 

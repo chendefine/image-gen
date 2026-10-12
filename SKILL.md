@@ -44,15 +44,28 @@ Behavior worth knowing:
 
 ## Write the prompt
 
-The image model already expands and optimizes prompts. Do **not** add keyword soup ("masterpiece, 8k, best quality, trending…") or rewrite the user's idea into something else. Your job is to pass a prompt that states the requirement and the expected result completely, in plain sentences, in the user's language:
+The image model already expands and optimizes prompts. A good prompt states the requirement and the expected result in plain sentences. Do **not** add keyword soup ("masterpiece, 8k, best quality, trending…").
+
+### Decide how much to change the user's words
+
+First decide which of these situations you are in:
+
+1. **The user asked for an image and the request is already specific.** Subject, style, and intent are clear and consistent. Pass the user's wording through almost as-is, in their language. Add only facts the model cannot know (exact text to render, target use, project colors) and a size or `--transparent` flag if needed. Do not restyle, embellish, or "improve" the idea; a rewrite tends to drift from what the user meant.
+2. **The user asked for an image and the request is vague, ambiguous, or contradictory.** Examples: "make a logo" with no product, name, or style; "minimalist but packed with detail"; an edit where it's unclear which part should change. Each call costs time and money, so don't guess. Ask a short clarifying question before generating, ideally with 2–4 concrete options to pick from (style, mood, composition, layout), plus your recommended default. Ask only about what would change the result; settle minor details yourself.
+3. **The image is a step inside a larger task.** The user's goal is something else (a web page, an app, a README, a slide deck, a game) and the image is an intermediate asset. Don't interrupt the user. Work out the requirements yourself from the task, the conversation, and the codebase, write a complete prompt following the guidance below, generate, check the result, and continue the main task. Mention the generated asset when you report the overall result.
+
+### What a complete prompt covers
+
+When you write or extend a prompt (mostly situation 3, partly 1), cover what applies:
 
 - **Subject and content** – what must appear, including any exact text to render (in quotes).
 - **Purpose and context** – where the image will be used (landing-page hero, app icon, README banner, empty-state illustration…). This lets the model pick sensible composition and detail.
-- **Style** – only what the user asked for or what the project already uses (e.g. flat vector, photo, 3D, pixel art; the project's brand colors).
+- **Style** – what the user asked for or what the project already uses (e.g. flat vector, photo, 3D, pixel art; the project's brand colors). Don't invent a style the context doesn't support.
 - **Composition** – layout, framing, empty space for overlay text, background.
+- **Constraints** – what must not appear (no text, no device frame, no watermark), when it matters.
 - **For edits** – what to change *and* what must stay unchanged; refer to multiple inputs by order ("the first image", "the logo in the second image").
 
-Fill gaps from the conversation and the codebase (brand colors in CSS/Tailwind config, existing asset style, target dimensions). Ask the user only when a missing detail would make the result clearly wrong. See [references/prompting.md](references/prompting.md) for scenario-specific examples.
+Fill gaps from the conversation and the codebase (brand colors in CSS/Tailwind config, existing asset style, target dimensions) before asking. See [references/prompting.md](references/prompting.md) for scenario-specific examples.
 
 ## Scenarios
 
